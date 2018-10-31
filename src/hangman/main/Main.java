@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     public Scanner scanner = new Scanner(System.in);
+    public static String chars = "";
     public boolean Ingame;
     public static String word;
 
@@ -37,19 +38,50 @@ public class Main {
                             "\nElke poging die je doet kost een leven tenzij de letter in het woord voorkomt!" +
                             "\nAls je levens op zijn heb je verloren!" +
                             "\nAls je alle letters van het woord hebt geraden win je!" +
-                            "\nDe geheime woorden bestaan echt en zijn allemaal Nederlands!");
+                            "\nDe geheime woorden bestaan echt en zijn allemaal Nederlands!" +
+                            "\n\nType STOP om te stoppen! (Hoofdletter gevoelig)");
 
         System.out.println("\nKlik op een toets om te starten!");
 
-        new Input(this, scanner.nextLine(), Ingame);
+        Input.InputHandler(this, scanner.nextLine(), Ingame);
 
+    }
+
+    //Geef een error message
+    public void error(String message) {
+        System.out.println(message);
+        Input.InputHandler(this, scanner.nextLine(), Ingame);
     }
 
     //Kies een random woord en start het spel.
     public void generate() {
 
-        Random rand = new Random(Words.words.size());
+        Ingame = true;
+        Random rand = new Random();
         word = Words.words.get(rand.nextInt(Words.words.size()));
+
+        guess();
+
+    }
+
+    //Laat speler een letter kiezen
+    public void guess() {
+
+        String text = "";
+        for(int i = 0; i < word.length(); i++) {
+
+            if(chars.isEmpty()) {text+="_ "; continue;}
+
+            if(chars.contains(Character.toString(word.charAt(i)))) {
+                text+=Character.toString(word.charAt(i));
+            } else {
+                text+="_ ";
+            }
+        }
+        System.out.println(text);
+        System.out.println(word);
+
+        Input.InputHandler(this, scanner.nextLine(), Ingame);
 
     }
 

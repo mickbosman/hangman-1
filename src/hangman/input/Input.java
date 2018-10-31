@@ -4,28 +4,17 @@ import hangman.main.Main;
 
 public class Input {
 
-    Main main;
-    String input;
-    boolean Ingame;
+    public static void InputHandler(Main main, String input, boolean Ingame) {
 
-    public Input(Main main, String input, boolean Ingame) {
+        if(input.equals("STOP")) {System.exit(69); return;}
+        if(!Ingame) {main.generate(); return;}
+        if(input.isEmpty()) {main.error("Je hebt niks ingevuld!"); return;}
 
-        this.main = main;
-        this.input = input;
-        this.Ingame = Ingame;
+        if(input.length() > 1) {main.error("Je mag maximaal een letter per keer raden!"); return;}
 
-        InputHandler();
+        Main.chars += input;
+        main.guess();
 
-    }
-
-    public void InputHandler() {
-
-        if(!Ingame) intro();
-
-    }
-
-    private void intro() {
-        main.generate();
     }
 
 }
