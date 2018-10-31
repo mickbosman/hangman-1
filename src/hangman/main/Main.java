@@ -11,6 +11,7 @@ public class Main {
     public static String chars = "";
     public boolean Ingame;
     public static String word;
+    public static int HP;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -21,6 +22,7 @@ public class Main {
     //Start daarna het programma
     public void init() {
         Ingame = false;
+        HP = 10;
         Words.wordAdder();
 
         start();
@@ -78,8 +80,14 @@ public class Main {
                 text+="_ ";
             }
         }
+        System.out.println("Levens: " + HP);
         System.out.println(text);
-        System.out.println(word);
+        if(!chars.isEmpty()) System.out.println("Gerade letters: " + chars);
+        if(!text.contains("_")) {
+            System.out.println("Je hebt gewonnen!");
+            System.out.println("Het woord was: " + Main.word);
+            System.exit(1);
+        }
 
         Input.InputHandler(this, scanner.nextLine(), Ingame);
 
