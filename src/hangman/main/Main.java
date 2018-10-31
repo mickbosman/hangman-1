@@ -32,10 +32,9 @@ public class Main {
     //Geef daarbij ook een optie om de game te starten!
     public void start() {
 
-        System.out.println("Welkom bij Stanley's hangman game!");
+        System.out.println(Color.RED + "Welkom bij Stanley's hangman game!" + Color.RESET);
 
-        System.out.println("\n" +
-                            "\nIn hangman is het de bedoeling dat je het geheime woord raad!" +
+        System.out.println( "\nIn hangman is het de bedoeling dat je het geheime woord raad!" +
                             "\nJe krijgt elke ronde 10 levens." +
                             "\nElke poging die je doet kost een leven tenzij de letter in het woord voorkomt!" +
                             "\nAls je levens op zijn heb je verloren!" +
@@ -43,7 +42,7 @@ public class Main {
                             "\nDe geheime woorden bestaan echt en zijn allemaal Nederlands!" +
                             "\n\nType STOP om te stoppen! (Hoofdletter gevoelig)");
 
-        System.out.println("\nKlik op een toets om te starten!");
+        System.out.println("\nKlik op enter om te starten!");
 
         Input.InputHandler(this, scanner.nextLine(), Ingame);
 
@@ -51,7 +50,7 @@ public class Main {
 
     //Geef een error message
     public void error(String message) {
-        System.out.println(message);
+        System.out.println(Color.RED + message + Color.RESET);
         Input.InputHandler(this, scanner.nextLine(), Ingame);
     }
 
@@ -82,7 +81,22 @@ public class Main {
         }
         System.out.println("Levens: " + HP);
         System.out.println(text);
-        if(!chars.isEmpty()) System.out.println("Gerade letters: " + chars);
+
+        if(!chars.isEmpty()) {
+
+            String colorerdChars = "";
+            for(int i = 0; i < chars.length(); i++) {
+                if(word.contains(Character.toString(chars.charAt(i)))){
+                    colorerdChars += (Color.GREEN + chars.charAt(i));
+                } else {
+                    colorerdChars += (Color.RED + chars.charAt(i));
+                }
+            }
+
+            System.out.println("Gerade letters: " + colorerdChars + Color.RESET);
+
+        }
+
         if(!text.contains("_")) {
             System.out.println("Je hebt gewonnen!");
             System.out.println("Het woord was: " + Main.word);
