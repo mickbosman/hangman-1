@@ -2,12 +2,14 @@ package hangman.main;
 
 import hangman.input.Input;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     public Scanner scanner = new Scanner(System.in);
     public boolean Ingame;
+    public static String word;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -18,6 +20,8 @@ public class Main {
     //Start daarna het programma
     public void init() {
         Ingame = false;
+        Words.wordAdder();
+
         start();
     }
 
@@ -28,14 +32,14 @@ public class Main {
         System.out.println("Welkom bij Stanley's hangman game!");
 
         System.out.println("\n" +
-                            "\n In hangman is het de bedoeling dat je het geheime woord raad!" +
-                            "\n Je krijgt elke ronde 10 levens." +
-                            "\n Elke poging die je doet kost een leven tenzij de letter in het woord voorkomt!" +
-                            "\n Als je levens op zijn heb je verloren!" +
-                            "\n Als je alle letters van het woord hebt geraden win je!" +
-                            "\n De geheime woorden bestaan echt!");
+                            "\nIn hangman is het de bedoeling dat je het geheime woord raad!" +
+                            "\nJe krijgt elke ronde 10 levens." +
+                            "\nElke poging die je doet kost een leven tenzij de letter in het woord voorkomt!" +
+                            "\nAls je levens op zijn heb je verloren!" +
+                            "\nAls je alle letters van het woord hebt geraden win je!" +
+                            "\nDe geheime woorden bestaan echt en zijn allemaal Nederlands!");
 
-        System.out.println("\n Klik op een toets om te starten!");
+        System.out.println("\nKlik op een toets om te starten!");
 
         new Input(this, scanner.nextLine(), Ingame);
 
@@ -44,7 +48,8 @@ public class Main {
     //Kies een random woord en start het spel.
     public void generate() {
 
-
+        Random rand = new Random(Words.words.size());
+        word = Words.words.get(rand.nextInt(Words.words.size()));
 
     }
 
